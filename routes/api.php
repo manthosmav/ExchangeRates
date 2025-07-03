@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/rates', [ExchangeController::class, 'index']);
 Route::post('/store-rates', [ExchangeController::class, 'store']);
+Route::get('/stored-rates', [ExchangeController::class, 'storedRates']);
