@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Models\ExchangeRate;
 use Exception;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Support\Facades\Http;
@@ -20,7 +21,7 @@ class ExchangeService
         try {
 
             // Adding Guzzle HTTP Client to solve the SSL error (cURL error 60: SSL certificate problem: self signed certificate in certificate chain laravel)
-            $http = new Client ([
+            $http = new Client([
                 'base_uri' => $this->url,
                 'verify' => false,
             ]);
@@ -30,9 +31,9 @@ class ExchangeService
             $attributes = json_decode(json_encode($xml), true);
 
             $attributes = $attributes['Cube']['Cube']['Cube'];
-            
+
             $rates = [];
-            foreach($attributes as $attribute) {
+            foreach ($attributes as $attribute) {
                 foreach ($attribute as $key => $value) {
                     if ($key === '@attributes') {
                         $rates[$value['currency']] = $value['rate'];
@@ -41,9 +42,25 @@ class ExchangeService
             }
 
             return $rates;
-
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
+        }
+    }
+    public function storeExchangeRates(): void
+    {
+        $exchangeRates = $this->fetchExchangeRates();
+        if (isset($exchangeRates['error'])) {
+            return;
+        }
+        foreach ($exchangeRates as $currencyTo => $rate) {
+            ExchangeRate::create(
+                [
+                    'currency_from' => 'EUR',
+                    'currency_to' => $currencyTo,
+                    'rate' => $rate,
+                    'retrieved_at' => now(),
+                ]
+            );
         }
     }
 }

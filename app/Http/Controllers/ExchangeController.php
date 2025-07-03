@@ -10,6 +10,13 @@ class ExchangeController extends Controller
     {
         $rates = $exchangeService->fetchExchangeRates();
 
-        return response()->json($rates);    
+        return response()->json($rates);
+    }
+
+    public function store(ExchangeService $exchangeService)
+    {
+        $exchangeService->storeExchangeRates();
+
+        return response()->json(['message' => 'Ecxhange rates stored.']);
     }
 }
