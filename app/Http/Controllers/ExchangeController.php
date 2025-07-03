@@ -46,4 +46,14 @@ class ExchangeController extends Controller
 
         return response()->json($exchangeRates);
     }
+
+    public function specificRate($id) {
+        $exchangeRate = ExchangeRate::find($id);
+
+        if (!$exchangeRate) {
+            return response()->json(['message' => 'Sorry, there is not a rate with this id'], 404);
+        }
+
+        return response()->json($exchangeRate);
+    }
 }
