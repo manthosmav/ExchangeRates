@@ -62,7 +62,6 @@ class ExchangeService
                     'retrieved_at' => now()->toDateTimeString(),
                 ]
             );
-            var_dump('Currency: ' . $currencyTo . ' Rate: ' . $rate . ' Date: ' . now()->toDateTimeString());
         }
     }
 }
