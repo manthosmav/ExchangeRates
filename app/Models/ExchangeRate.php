@@ -13,9 +13,6 @@ class ExchangeRate extends Model
         'currency_from',
         'currency_to',
         'rate',
-    ];
-
-    protected $casts = [
-        'retrieved_at' => 'datetime',
+        'retrieved_at',
     ];
 }

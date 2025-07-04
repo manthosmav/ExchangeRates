@@ -53,14 +53,17 @@ class ExchangeService
             return;
         }
         foreach ($exchangeRates as $currencyTo => $rate) {
-            ExchangeRate::create(
+            ExchangeRate::updateOrCreate(
                 [
                     'currency_from' => 'EUR',
                     'currency_to' => $currencyTo,
+                ],
+                [
                     'rate' => $rate,
-                    'retrieved_at' => now(),
+                    'retrieved_at' => now()->toDateTimeString(),
                 ]
             );
+            var_dump('Currency: ' . $currencyTo . ' Rate: ' . $rate . ' Date: ' . now()->toDateTimeString());
         }
     }
 }

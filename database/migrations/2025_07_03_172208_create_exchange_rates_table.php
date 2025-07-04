@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('currency_from');
             $table->string('currency_to');
-            $table->float('rate');
-            $table->timestamp('retrieved_at');
+            $table->string('rate');
+            $table->dateTime('retrieved_at');
             $table->timestamps();
         });
     }
