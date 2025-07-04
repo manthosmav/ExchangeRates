@@ -12,7 +12,7 @@ use GuzzleHttp\Client;
 
 class ExchangeService
 {
-    public string $url = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
+    private string $url = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
 
     public function fetchExchangeRates(): array
