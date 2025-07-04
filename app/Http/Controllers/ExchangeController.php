@@ -30,7 +30,7 @@ class ExchangeController extends Controller
         }
 
         if ($request->has('retrieved_at')) {
-            $query->where('retrieved_at', $request->input('retrieved_at'));
+            $query->where('retrieved_at', 'like', $request->input('retrieved_at') . '%');
         }
 
         if ($request->has('min_rate')) {
