@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class ExchangeServiceTest extends TestCase
 {
-    private string $url = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
+    private string $url = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml'; 
 
     /**
      * Test fetchExchangeRates returns array of rates

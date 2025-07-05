@@ -49,4 +49,6 @@ This project is calling an External API, parsing and persisting results in a MyS
 4. `api/stored-rates/{id}`
 - This API returns a specific exchange rate
 
-## Thank you
+## Notes
+
+- This project requires PHP version >= 8.1, composer and mysql
