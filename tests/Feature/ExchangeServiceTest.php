@@ -3,11 +3,13 @@
 namespace Tests\Unit;
 
 use App\Services\ExchangeService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Http;
 
 class ExchangeServiceTest extends TestCase
 {
+    use RefreshDatabase;
     private string $url = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml'; 
 
     /**

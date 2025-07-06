@@ -2,10 +2,14 @@
 
 namespace Tests\Unit;
 
+use App\Models\ExchangeRate;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExchangeControllerTest extends TestCase
 {
+
+    use RefreshDatabase;
     /**
      * Test the Exchange Controller that returns the full list of exchange rates
      */
@@ -27,7 +31,7 @@ class ExchangeControllerTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertJson(['message' => 'Ecxhange rates stored.']);
+        $response->assertJson(['message' => 'Exchange rates stored.']);
     }
 
     /**
@@ -64,7 +68,13 @@ class ExchangeControllerTest extends TestCase
      */
     public function test_specific_rate_returns_rate_when_found(): void
     {
-        $response = $this->get('/api/stored-rates/1');
+        $exchangeRate = ExchangeRate::create([
+            'currency_from' => 'EUR',
+            'currency_to' => 'USD',
+            'rate' => '1.0850',
+            'retrieved_at' => now(),
+        ]);
+        $response = $this->get('/api/stored-rates/' . $exchangeRate->id);
 
         $response->assertStatus(200);
 

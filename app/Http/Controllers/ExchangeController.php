@@ -19,7 +19,7 @@ class ExchangeController extends Controller
     {
         $exchangeService->storeExchangeRates();
 
-        return response()->json(['message' => 'Ecxhange rates stored.']);
+        return response()->json(['message' => 'Exchange rates stored.']);
     }
 
     public function storedRates(Request $request) { 
@@ -49,9 +49,9 @@ class ExchangeController extends Controller
 
     public function specificRate($id) {
         $exchangeRate = ExchangeRate::find($id);
-
+        
         if (!$exchangeRate) {
-            return response()->json(['message' => 'Sorry, there is not a rate with this id'], 404);
+            return response()->json(['message' => 'Sorry, there is no corresponding record to this id'], 404);
         }
 
         return response()->json($exchangeRate);
